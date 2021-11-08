@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.7)
 
-add_definitions(-std=c++17)
+project(Guard_FSM)
+
+add_definitions(-std=c++11)
 
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
 
-project(HelloWorld)
+# Find all executables
+file(GLOB project_SRCS src/*.cpp) #src/*.h
 
-add_executable(HelloWorld src/main.cpp)
+add_executable(guard ${project_SRCS})
