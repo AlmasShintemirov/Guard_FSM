@@ -12,6 +12,9 @@ If an intruder leaves the area, the guard returns to patrolling the territory (c
 
 * ShootBack:  The guard find cover and shoots back at an intruder. If an intruder continues attacking the guard, the guard retreats to the base (change to state OnBase). Otherwise, the guard continues pursuing an intruder (change to state InPursuit).
 
+![Слайд1](https://user-images.githubusercontent.com/13367696/140880982-cb082b32-9560-4bd1-a316-c80d034d6674.JPG)
+
+
 The guard FSM project is realized using an C++ OOP approach following the Programming Game AI by Example (Chapter 2) by Mat Buckland 2002 (https://www.amazon.com/-/es/Mat-Buckland/dp/1556220782), and has been submitted as the Capstone project in the [Udacity C++ Nanodegree Program](https://www.udacity.com/course/c-plus-plus-nanodegree--nd213).
 
 ## Dependencies for Running Locally
