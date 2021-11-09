@@ -5,10 +5,10 @@ This project presents a simulation of an autonomous guard agent patrolling an ar
 
 * OnBase:  In this state the guard stays at a base for having a break. When a fixed break time is up the guard moves out to the patrol area (change to state InPatrol). 
 
-* InPatrol:  In this state the guard patrols the area for a certain on duty period. When the time is up, the guard returns to the base for a break (change to state OnBase). If an intruder is detected, the guard start pursuing him (change to state InPursuit) 
+* InPatrol:  In this state the guard patrols the area for a certain on duty period. When the time is up, the guard returns to the base for a break (change to state OnBase). If an intruder is detected, the guard starts pursuing him (change to state InPursuit) 
 
-* InPursuit:  The guard chases an intruder.  If intruder fired at the guard, the guard finds cover and shoots back (change to state ShootBack).
-If an intruder left the area, the guard return to patrolling the territory (change to state InPatrol)
+* InPursuit:  The guard chases an intruder.  If an intruder fires at the guard, the guard finds cover for shooting back (change to state ShootBack).
+If an intruder leaves the area, the guard returns to patrolling the territory (change to state InPatrol)
 
 * ShootBack:  The guard find cover and shoots back at an intruder. If an intruder continues attacking the guard, the guard retreats to the base (change to state OnBase). Otherwise, the guard continues pursuing an intruder (change to state InPursuit).
 
