@@ -5,7 +5,7 @@
 
 #include <iostream>
 using std::cout;
-
+using std::endl;
 
 //--------------------------------------methods for OnBase
 
@@ -18,10 +18,12 @@ OnBase* OnBase::Instance()
 
 void OnBase::Enter(Guard* pGuard)
 {
-  //if the miner is not already located at the goldmine, he must
-  //change location to the gold mine
+  
   cout << "The guard is on the base\n";
-  pGuard->SetTimeOnBase(0);
+  pGuard->TimeOnBase(0);
+
+  //if the guard is not already located at the base, he must
+  //change location to the base
   if (pGuard->Location() != base)
   {
     pGuard->ChangeLocation(base);
@@ -31,15 +33,12 @@ void OnBase::Enter(Guard* pGuard)
 
 void OnBase::Execute(Guard* pGuard)
 {  
-  //if the miner is at the goldmine he digs for gold until he
-  //is carrying in excess of MaxNuggets. If he gets thirsty during
-  //his digging he packs up work for a while and changes state to
-  //gp to the saloon for a whiskey.
-  cout << "The guard is having a break \n";
+  //The guard is on a breakuntil the break time is reached. 
   pGuard->IncreaseTimeOnBase();
-  pGuard->SetTimeOnDuty(0);
+  pGuard->TimeOnDuty(0);
+  cout << "The guard is having a break - " << pGuard->TimeOnBase() << endl;
 
-  //if enough gold mined, go and put it in the bank
+  //Once the break time is up, the guard moves out to patrol the area
   if (pGuard->TimeOnBaseUp())
   {
     pGuard->ChangeLocation(patrol_area);
@@ -65,11 +64,13 @@ InPatrol* InPatrol::Instance()
 }
 
 void InPatrol::Enter(Guard* pGuard)
-{  
+{ 
+  //if the guard is not already in the patrol area, he must
+  //change location to the patrol area
   if (pGuard->Location() != patrol_area)
   {
     pGuard->ChangeLocation(patrol_area);
-    cout << "The guard is moving to a patrol area\n";
+    cout << "The guard is moving to the patrol area\n";
   }
 }
 
@@ -77,9 +78,10 @@ void InPatrol::Enter(Guard* pGuard)
 void InPatrol::Execute(Guard* pGuard)
 {
   //patrolling the area
-  cout << "The guard is patrolling the area\n";
   pGuard->IncreaseTimeOnDuty();
-
+  cout << "The guard is patrolling the area - " << pGuard->TimeOnDuty() << endl;
+  // If an intruder is detected, the guard starts pursuing him. 
+  // Else the guard returns to the base when his duty time is up
   if (pGuard->Intrusion())
   {
     cout << "The guard detects an intruder \n";
@@ -154,13 +156,13 @@ void ShootBack::Enter(Guard* pGuard)
   if (pGuard->Location() != cover)
   {    
     pGuard->ChangeLocation(cover);
-    cout << "The guard finds cover\n";
+    cout << "The guard looks for a cover\n";
   }
 }
 
 void ShootBack::Execute(Guard* pGuard)
 {
-  cout << "The guard found cover and is shooting back at the intruder\n";
+  cout << "The guard has found a cover and is shooting back at the intruder\n";
 
   if (pGuard->UnderFire())
   { 
@@ -171,8 +173,8 @@ void ShootBack::Execute(Guard* pGuard)
   }
   else 
   {
-    cout << "The intruder has left the patrol area\n";
-    pGuard->GetFSM()->ChangeState(InPatrol::Instance());
+    cout << "The guard continues pursuing an intruder\n";
+    pGuard->GetFSM()->ChangeState(InPursuit::Instance());
   }
 
 }
@@ -180,6 +182,6 @@ void ShootBack::Execute(Guard* pGuard)
 
 void ShootBack::Exit(Guard* pGuard)
 { 
-  cout << "The guard stops shoting and leaves the cover\n";
+  cout << "The guard stops shooting and leaves the cover\n";
 }
 

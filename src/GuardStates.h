@@ -6,9 +6,8 @@
 //
 //  Desc:   All the states that can be assigned to the Guard class
 //
-//  Originally created by Mat Buckland 2002 (https://www.amazon.com/-/es/Mat-Buckland/dp/1556220782)
-//
-//  Modified by Almas Shintemirov 2021 (https://www.alaris.kz)
+//  Created by Almas Shintemirov 2021 (https://www.alaris.kz) based on the code template 
+//  by Mat Buckland 2002 (https://www.amazon.com/-/es/Mat-Buckland/dp/1556220782)
 //
 //------------------------------------------------------------------------
 #include "State.h"
@@ -18,10 +17,9 @@ class Guard;
 
 //------------------------------------------------------------------------
 //
-//  In this state the miner will walk to a goldmine and pick up a nugget
-//  of gold. If the miner already has a nugget of gold he'll change state
-//  to VisitBankAndDepositGold. If he gets thirsty he'll change state
-//  to QuenchThirst
+//  In this state the guard stays at a base for having a break. 
+//  When a fixed break time is up the guard moves out to the patrol area (change to state InPatrol). 
+//
 //------------------------------------------------------------------------
 class OnBase : public State<Guard>
 {
@@ -49,9 +47,10 @@ public:
 
 //------------------------------------------------------------------------
 //
-//  Entity will go to a bank and deposit any nuggets he is carrying. If the 
-//  miner is subsequently wealthy enough he'll walk home, otherwise he'll
-//  keep going to get more gold
+//  In this state the guard patrols the area for a certain on duty period. 
+//  When the time is up, the guard returns to the base for a break (change to state OnBase). 
+//  If an intruder is detected, the guard start pursuing him (change to state InPursuit) 
+//
 //------------------------------------------------------------------------
 class InPatrol : public State<Guard>
 {
@@ -78,8 +77,9 @@ public:
 
 //------------------------------------------------------------------------
 //
-//  miner will go home and sleep until his fatigue is decreased
-//  sufficiently
+//  The guard chases an intruder.  If intruder fired at the guard, the guard finds cover and shoots back (change to state ShootBack)
+//  If an intruder left the area, the guard return to patrolling the territory (change to state InPatrol)
+//  
 //------------------------------------------------------------------------
 class InPursuit : public State<Guard>
 {
@@ -105,7 +105,11 @@ public:
 
 
 //------------------------------------------------------------------------
-//
+//  
+//  The guard find cover and shoots back at an intruder. 
+//  If an intruder continues attacking the guard, the guard retreats to the base (change to state OnBase).
+//  Otherwise, the guard continues pursuing an intruder (change to state InPursuit) 
+//  
 //------------------------------------------------------------------------
 class ShootBack : public State<Guard>
 {

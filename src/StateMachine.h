@@ -8,9 +8,8 @@
 //  Desc:   State machine class. Inherit from this class and create some 
 //          states to give your agents FSM functionality
 //
-//  Originally created by Mat Buckland 2002 (https://www.amazon.com/-/es/Mat-Buckland/dp/1556220782)
-//
-//  Modified by Almas Shintemirov 2021 (https://www.alaris.kz)
+//  Created by Almas Shintemirov 2021 (https://www.alaris.kz) based on the code template 
+//  by Mat Buckland 2002 (https://www.amazon.com/-/es/Mat-Buckland/dp/1556220782)
 //
 //------------------------------------------------------------------------
 #include <cassert>

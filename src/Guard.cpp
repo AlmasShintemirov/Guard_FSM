@@ -4,13 +4,10 @@
 //-----------------------------------------------------------------------------
 void Guard::Update()
 {
-  //SetTextColor(FOREGROUND_RED| FOREGROUND_INTENSITY);
-
-  //m_iThirst += 1;
-  
   pStateMachine->Update();
 }
 
+// The function defines the presence of an intruder in the patrol area with 50% probability 
 bool Guard::Intrusion()
 {
   float prob = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
@@ -22,6 +19,8 @@ bool Guard::Intrusion()
   return IntruderDetected;
 }
 
+
+// The function defines if an intruder fires at the guard with 50% probability 
 bool Guard::UnderFire()
 {
   float prob = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);

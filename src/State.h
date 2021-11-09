@@ -6,9 +6,8 @@
 //
 //  Desc:   abstract base class to define an interface for a state
 //
-//  Originally created by Mat Buckland 2002 (https://www.amazon.com/-/es/Mat-Buckland/dp/1556220782)
-//
-//  Modified by Almas Shintemirov 2021 (https://www.alaris.kz)
+//  Created by Almas Shintemirov 2021 (https://www.alaris.kz) based on the code template 
+//  by Mat Buckland 2002 (https://www.amazon.com/-/es/Mat-Buckland/dp/1556220782)
 //
 //------------------------------------------------------------------------
 
@@ -26,8 +25,7 @@ public:
   //this is the states normal update function
   virtual void Execute(entity_type*)=0;
 
-  //this will execute when the state is exited. (My word, isn't
-  //life full of surprises... ;o))
+  //this will execute when the state is exited. 
   virtual void Exit(entity_type*)=0;
 };
 
